@@ -19,12 +19,10 @@
     </style>
 </head>
 <body>
-    
-    <!-- http://127.0.0.1:5500/index.html?domain=fbhda.qrveyapp.com&token=eyJraWQiOiJBNUpzZUJSMHZ2Qkh5RV9zRUlFWnpUa01TSE42X2VKbG1kY2NiMVk1ZE1rIiwiZW5jIjoiQTEyOENCQy1IUzI1NiIsImFsZyI6IlBCRVMyLUhTMjU2K0ExMjhLVyIsInAyYyI6MzIwOCwicDJzIjoiekpDclZkMVBTX2p0NzhvcTQzTTJ1dyJ9.UUDtbbdveS_g7szGnaOlY5ppznVoYypzwfgYar7fF20Hy9EBEjWPqQ.gj6X6ztgGlFAhcrbS3vdDQ.iVYNayVokZ-W4KHHgugAeU8x0kBuVGr4-vqFgdrWRheBjvaRkk5NVX0-opDMXQmlJ9RAuOb3KKE-0ACRqf8HyD2RCWB0E3eStaskRqkVzS8OjL3Laekfeq4GOIIVfN0C_-07orbgYKLGIKh_8km_W6bgbySjXFmKGrHJtj0AUT9jOxM-Uh37vMI3n7tDfOKLc4D0HJfvR8Oqx22-5pTmOGJYv65C5gAbbTHQS1jMj-1fEqarBoJLH7y0iLj2qRGTdXruV0CgSMbPpq21f4RyxN0yhpoS9xVSygZctYV8P4LYIyD9qcr4SZlOmD1EG_24_qV3EkeuLgSO3RKDAU_iQR0zYMEjFeDUgzZIWOOttweqVLwpsg_NU65OBlarx3d3wu2vrSvOh3Snvx-f-jbll3qQkh7cceYWbvl-_6lZcDSWzzbK1dgu90UxUYFuHWoJI1ij_-3OzUi3jDMpXCXGyA.NIh2cFaWIDUg_5a8hCdrFw&app_id=5qDGom1Pf&dashboard_id=wNEtEjKKvCjuVSkr434YT -->
 
     <script>
         const params = new URLSearchParams(window.location.search);
-        const domain = 'https://' + params.get("domain");
+        const domain = `https://${params.get("subdomain")}.qrveyapp.com`;
         const token = params.get("token");
         const app_id = params.get("app_id");
         const dashboard_id = params.get("dashboard_id");
@@ -92,7 +90,7 @@
         `;
 
         window['config'] = {
-            domain: domain,  qv_token: token, 
+            domain: domain, qv_token: token, 
             dashboard_id: dashboard_id, app_id: app_id, 
             personalization: { enabled: true, add_filter: true, edit_page: false }, 
             "styles": {
