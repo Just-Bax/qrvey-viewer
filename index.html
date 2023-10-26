@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qrvey-viewer</title>
+    <style>
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            background-color: lavender;
+            padding: 10px;
+        }
+        .kpi-container > div {
+            height: 200px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- http://127.0.0.1:5500/index.html?domain=fbhda.qrveyapp.com&token=eyJraWQiOiJBNUpzZUJSMHZ2Qkh5RV9zRUlFWnpUa01TSE42X2VKbG1kY2NiMVk1ZE1rIiwiZW5jIjoiQTEyOENCQy1IUzI1NiIsImFsZyI6IlBCRVMyLUhTMjU2K0ExMjhLVyIsInAyYyI6MzIwOCwicDJzIjoiekpDclZkMVBTX2p0NzhvcTQzTTJ1dyJ9.UUDtbbdveS_g7szGnaOlY5ppznVoYypzwfgYar7fF20Hy9EBEjWPqQ.gj6X6ztgGlFAhcrbS3vdDQ.iVYNayVokZ-W4KHHgugAeU8x0kBuVGr4-vqFgdrWRheBjvaRkk5NVX0-opDMXQmlJ9RAuOb3KKE-0ACRqf8HyD2RCWB0E3eStaskRqkVzS8OjL3Laekfeq4GOIIVfN0C_-07orbgYKLGIKh_8km_W6bgbySjXFmKGrHJtj0AUT9jOxM-Uh37vMI3n7tDfOKLc4D0HJfvR8Oqx22-5pTmOGJYv65C5gAbbTHQS1jMj-1fEqarBoJLH7y0iLj2qRGTdXruV0CgSMbPpq21f4RyxN0yhpoS9xVSygZctYV8P4LYIyD9qcr4SZlOmD1EG_24_qV3EkeuLgSO3RKDAU_iQR0zYMEjFeDUgzZIWOOttweqVLwpsg_NU65OBlarx3d3wu2vrSvOh3Snvx-f-jbll3qQkh7cceYWbvl-_6lZcDSWzzbK1dgu90UxUYFuHWoJI1ij_-3OzUi3jDMpXCXGyA.NIh2cFaWIDUg_5a8hCdrFw&app_id=5qDGom1Pf&dashboard_id=wNEtEjKKvCjuVSkr434YT -->
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const domain = 'https://' + params.get("domain");
+        const token = params.get("token");
+        const app_id = params.get("app_id");
+        const dashboard_id = params.get("dashboard_id");
+
+        var custom_styles = `
+            @import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300;1,400&display=swap);
+            div.indicator-metric {
+                font-family: Lato, sans-serif !important;
+                font-weight: 400 !important
+            }
+            h2.an-panel-header__title {
+                font-family: Lato, sans-serif !important;
+                font-weight: 400 !important;
+                font-size: 16px !important;
+                color: #333 !important
+            }
+            .an-panel-header__title {
+                color: #333 !important
+            }
+            .an-panel-overlay {
+                background-color: #f7f7f7 !important
+            }
+            .ql-editor p, .ql-editor p span {
+                font-family: Lato, sans-serif !important;
+            }
+            .an-panel-header,
+            .an-panel-body {
+                background-color: #f7f7f7 !important
+            }
+            .an-panel-tablechart,
+            an-panel-tablechart {
+                background-color: #fff !important
+            }
+            .dx-datagrid-headers .an-header-question-icon {
+                display: none !important
+            }
+            .dx-datagrid-headers .an-header-title {
+                white-space: nowrap;
+                text-overflow: unset
+            }
+            .dx-datagrid-headers .an-header-title .an-header-title-text {
+                white-space: normal
+            }
+            .dx-datagrid-headers .dx-datagrid-table .dx-row>td {
+                vertical-align: bottom !important;
+                padding-bottom: 6px !important;
+            }
+            .grid-canvas{
+                margin-left: unset !important;
+            }
+            h2.an-panel-header__title{
+                font-family: 'Lato', sans-serif !important;
+                font-size: 20px;
+                color: #333333 !important;
+            }
+            .indicator-metric, .ql-editor > *, .ql-editor p, .ql-editor p span{
+                font-family: 'Lato', sans-serif !important;
+            }
+            an-filter-builder-modal{
+                z-index: 11991 !important;
+            }
+            /* #page-drill-back-button{
+                display: none !important;
+            } */ 
+        `;
+
+        window['config'] = {
+            domain: domain,  qv_token: token, 
+            dashboard_id: dashboard_id, app_id: app_id, 
+            personalization: { enabled: true, add_filter: true, edit_page: false }, 
+            "styles": {
+                "pageView": {
+                    "canvasTextFontFamily": "'Arial', sans-serif",
+                    "tabsBackgroundColor": "#bbbbbb",
+                    "canvasDatepickerIconSelectorsColor": "#00549f",
+                    "canvasValuelistIconSelectorsColor": "#00549f",
+                    "navigationElementsColor": "#00549f",
+                    "pageViewButtonIconColor": "#FFFFFF",
+                    "pageViewButtonBackgroundColor": "#005289"
+                }
+            }, 
+            "custom_styles": true, "customCSSRules": custom_styles, 
+            "filter_panel_default_view": "closed", 
+        };
+
+        dashboard = document.createElement("qrvey-end-user");
+        dashboard.setAttribute("settings", "config");
+        document.body.append(dashboard);
+    </script>
+    <script type="text/javascript" src="https://d3a4lhgk15l3c7.cloudfront.net/widgets-launcher/app.js?7.5.202309200058"></script>
+</body>
+</html>
